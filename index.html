@@ -1,0 +1,912 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mi Persona Favorita | Un viaje romántico</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+  <!-- AOS Animation Library -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style id="app-style">
+    :root {
+      --primary-color: #ffcad4;
+      --secondary-color: #f0e6ef;
+      --text-color: #5e4c5a;
+      --accent-color: #f67280;
+    }
+
+    body {
+      font-family: 'Poppins', sans-serif;
+      overflow-x: hidden;
+      background: linear-gradient(135deg, var(--secondary-color) 0%, var(--primary-color) 100%);
+      min-height: 100vh;
+      color: var(--text-color);
+      transition: background 0.5s ease;
+    }
+
+    body.lavender-theme {
+      --primary-color: #d4c4fb;
+      --secondary-color: #e9e3ff;
+      --text-color: #4a4063;
+      --accent-color: #9d84d2;
+    }
+
+    body.ivory-theme {
+      --primary-color: #fff8e8;
+      --secondary-color: #fffdf6;
+      --text-color: #6d5f50;
+      --accent-color: #d4b483;
+    }
+
+    h1, h2, h3, .cursive {
+      font-family: 'Dancing Script', cursive;
+    }
+
+    .btn {
+      background-color: var(--accent-color);
+      color: white;
+      padding: 12px 24px;
+      border-radius: 30px;
+      font-weight: 600;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      border: none;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 7px 10px rgba(0,0,0,0.15);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      border: 2px solid var(--accent-color);
+      color: var(--accent-color);
+    }
+
+    .btn-outline:hover {
+      background-color: var(--accent-color);
+      color: white;
+    }
+
+    #landing-page {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    #main-content {
+      display: none;
+      min-height: 100vh;
+      padding: 2rem;
+    }
+
+    .letter-container {
+      background-color: rgba(255,255,255,0.8);
+      padding: 2rem;
+      border-radius: 10px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .letter {
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.5rem;
+      line-height: 1.8;
+      display: none;
+    }
+
+    .letter.active {
+      display: block;
+    }
+
+    .typed-cursor {
+      display: inline-block;
+      width: 2px;
+      height: 1.2em;
+      background-color: var(--text-color);
+      animation: blink 1s infinite;
+      vertical-align: text-bottom;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+
+    .carousel-container {
+      margin-top: 3rem;
+      position: relative;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    }
+
+    .carousel-slide {
+      display: none;
+      width: 100%;
+    }
+
+    .carousel-slide.active {
+      display: block;
+      animation: fadeIn 0.8s;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 400px;
+      object-fit: cover;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    .carousel-controls {
+      position: absolute;
+      bottom: 15px;
+      left: 0;
+      right: 0;
+      display: flex;
+      justify-content: space-between;
+      padding: 0 15px;
+    }
+
+    .carousel-control {
+      background-color: rgba(255,255,255,0.7);
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .carousel-control:hover {
+      background-color: rgba(255,255,255,0.9);
+    }
+
+    .heart-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1000;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="%23f67280" d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z"/></svg>') no-repeat;
+      opacity: 0;
+      animation: fall 6s linear forwards;
+    }
+
+    @keyframes fall {
+      0% {
+        opacity: 1;
+        transform: translateY(-20px) rotate(0deg);
+      }
+      100% {
+        opacity: 0;
+        transform: translateY(100vh) rotate(360deg);
+      }
+    }
+
+    .music-controls {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      display: flex;
+      gap: 10px;
+      z-index: 100;
+    }
+
+    .settings-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+    }
+
+    .settings-menu {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+      padding: 15px;
+      display: none;
+      min-width: 200px;
+    }
+
+    .settings-menu.active {
+      display: block;
+    }
+
+    .theme-option {
+      display: flex;
+      align-items: center;
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+
+    .theme-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .theme-pink {
+      background: linear-gradient(135deg, #f0e6ef 0%, #ffcad4 100%);
+    }
+
+    .theme-lavender {
+      background: linear-gradient(135deg, #e9e3ff 0%, #d4c4fb 100%);
+    }
+
+    .theme-ivory {
+      background: linear-gradient(135deg, #fffdf6 0%, #fff8e8 100%);
+    }
+
+    .lyrics-container {
+      text-align: center;
+      margin: 2rem auto;
+      max-width: 600px;
+      min-height: 80px;
+    }
+
+    .lyrics-line {
+      font-size: 1.2rem;
+      margin-bottom: 0.5rem;
+      opacity: 0.5;
+    }
+
+    .lyrics-line.active {
+      opacity: 1;
+      font-weight: bold;
+      color: var(--accent-color);
+    }
+
+    .control-icon {
+      cursor: pointer;
+      color: var(--accent-color);
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background-color: white;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+
+    .control-icon:hover {
+      transform: scale(1.1);
+    }
+
+    /* Loading overlay */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--primary-color);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .loader {
+      width: 60px;
+      height: 60px;
+      border: 5px solid rgba(255,255,255,0.3);
+      border-radius: 50%;
+      border-top-color: var(--accent-color);
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Navigation controls */
+    .letter-nav {
+      display: flex;
+      justify-content: center;
+      margin-top: 2rem;
+      gap: 1rem;
+    }
+
+    /* Volume slider */
+    .volume-control {
+      position: relative;
+      display: flex;
+      align-items: center;
+    }
+
+    .volume-slider {
+      width: 0;
+      height: 5px;
+      background: #e0e0e0;
+      border-radius: 2.5px;
+      transition: width 0.3s ease;
+      overflow: hidden;
+      margin-left: 10px;
+    }
+
+    .volume-slider.active {
+      width: 100px;
+    }
+
+    .volume-slider-fill {
+      height: 100%;
+      background-color: var(--accent-color);
+      width: 100%;
+      transform-origin: left;
+      transform: scaleX(0.7); /* Default volume at 70% */
+    }
+
+    /* Heart button */
+    .heart-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      cursor: pointer;
+      z-index: 100;
+      color: var(--accent-color);
+      font-size: 1.5rem;
+      transition: transform 0.3s ease;
+    }
+
+    .heart-btn:hover {
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading overlay -->
+  <div class="loading-overlay">
+    <div class="loader"></div>
+    <p class="mt-4">Cargando tu momento especial...</p>
+  </div>
+
+  <!-- Settings panel -->
+  <div class="settings-panel">
+    <div class="control-icon" id="settings-toggle">
+      <i class="fas fa-cog"></i>
+    </div>
+    <div class="settings-menu">
+      <h3 class="mb-3 font-bold">Tema</h3>
+      <div class="theme-option" data-theme="default">
+        <div class="theme-circle theme-pink"></div>
+        <span>Rosa</span>
+      </div>
+      <div class="theme-option" data-theme="lavender">
+        <div class="theme-circle theme-lavender"></div>
+        <span>Lavanda</span>
+      </div>
+      <div class="theme-option" data-theme="ivory">
+        <div class="theme-circle theme-ivory"></div>
+        <span>Marfil</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Music controls -->
+  <div class="music-controls">
+    <div class="control-icon" id="play-pause">
+      <i class="fas fa-play"></i>
+    </div>
+    <div class="volume-control">
+      <div class="control-icon" id="volume-toggle">
+        <i class="fas fa-volume-up"></i>
+      </div>
+      <div class="volume-slider">
+        <div class="volume-slider-fill"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Landing page -->
+  <div id="landing-page">
+    <h1 class="text-5xl mb-8 cursive" data-aos="fade-down">Mi Persona Favorita</h1>
+    <p class="mb-8 text-xl" data-aos="fade-up">Un viaje de amor y recuerdos.</p>
+    <button class="btn text-xl" id="open-letter-btn" data-aos="zoom-in">
+      <i class="far fa-envelope mr-2"></i> Carta abierta
+    </button>
+  </div>
+
+  <!-- Main content -->
+  <div id="main-content">
+    <!-- Lyrics display -->
+    <div class="lyrics-container mb-6">
+      <p class="lyrics-line">Esperando que empiece la música...</p>
+    </div>
+    
+    <!-- Letter section -->
+    <div class="letter-container">
+      <div class="letter active" id="letter-1">
+        <!-- Letter content will be typed here -->
+      </div>
+      <div class="letter" id="letter-2">
+        <!-- Letter content will be typed here -->
+      </div>
+      <div class="letter" id="letter-3">
+        <!-- Letter content will be typed here -->
+      </div>
+      
+      <!-- Letter navigation -->
+      <div class="letter-nav">
+        <button class="btn btn-outline" id="prev-letter" disabled>
+          <i class="fas fa-chevron-left mr-2"></i> Anterior
+        </button>
+        <button class="btn" id="next-letter">
+          Próximo <i class="fas fa-chevron-right ml-2"></i>
+        </button>
+      </div>
+    </div>
+    
+    <!-- Photo carousel -->
+    <div class="carousel-container">
+      <div class="carousel-slide active">
+        <img src="7.jpg" alt="Romantic image 1">
+      </div>
+      <div class="carousel-slide">
+        <img src="2.jpg" alt="Romantic image 2">
+      </div>
+      <div class="carousel-slide">
+        <img src="3.jpg" alt="Romantic image 3">
+      </div>
+      <div class="carousel-slide">
+        <img src="4.jpg" alt="Romantic image 4">
+      </div>
+      <div class="carousel-slide">
+        <img src="5.jpg" alt="Romantic image 5">
+      </div>
+      <div class="carousel-slide">
+        <img src="6.jpg" alt="Romantic image 6" />
+      </div>
+      <div class="carousel-slide">
+        <img src="1.jpg" alt="Romantic image 7" />
+      </div>
+      <div class="carousel-controls">
+        <div class="carousel-control" id="prev-slide">
+          <i class="fas fa-chevron-left"></i>
+        </div>
+        <div class="carousel-control" id="carousel-play-pause">
+          <i class="fas fa-pause"></i>
+        </div>
+        <div class="carousel-control" id="next-slide">
+          <i class="fas fa-chevron-right"></i>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Restart button -->
+    <div class="text-center mt-8">
+      <button class="btn btn-outline" id="restart-btn">
+        <i class="fas fa-redo mr-2"></i> Reanudar
+      </button>
+    </div>
+  </div>
+  
+  <!-- Heart button -->
+  <div class="heart-btn" id="heart-btn">
+    <i class="fas fa-heart"></i>
+  </div>
+  
+  <!-- Heart container for confetti -->
+  <div class="heart-container" id="heart-container"></div>
+  
+  <!-- Audio element -->
+  <audio id="background-music" loop>
+    <source src="Te amo - Zafiro Rap Feat Miguel Angel ( LETRA)(M4A_128K).m4a" type="audio/mpeg">
+    Su navegador no soporta el elemento de audio.
+  </audio>
+
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script id="app-script">
+    // Initialize AOS animation library
+    AOS.init({
+      duration: 1000,
+      once: true
+    });
+    
+    // DOM Elements
+    const loadingOverlay = document.querySelector('.loading-overlay');
+    const landingPage = document.getElementById('landing-page');
+    const mainContent = document.getElementById('main-content');
+    const openLetterBtn = document.getElementById('open-letter-btn');
+    const letters = document.querySelectorAll('.letter');
+    const prevLetterBtn = document.getElementById('prev-letter');
+    const nextLetterBtn = document.getElementById('next-letter');
+    const restartBtn = document.getElementById('restart-btn');
+    const carouselSlides = document.querySelectorAll('.carousel-slide');
+    const prevSlideBtn = document.getElementById('prev-slide');
+    const nextSlideBtn = document.getElementById('next-slide');
+    const carouselPlayPauseBtn = document.getElementById('carousel-play-pause');
+    const heartBtn = document.getElementById('heart-btn');
+    const heartContainer = document.getElementById('heart-container');
+    const music = document.getElementById('background-music');
+    const playPauseBtn = document.getElementById('play-pause');
+    const volumeToggle = document.getElementById('volume-toggle');
+    const volumeSlider = document.querySelector('.volume-slider');
+    const volumeSliderFill = document.querySelector('.volume-slider-fill');
+    const settingsToggle = document.getElementById('settings-toggle');
+    const settingsMenu = document.querySelector('.settings-menu');
+    const themeOptions = document.querySelectorAll('.theme-option');
+    const lyricsContainer = document.querySelector('.lyrics-container');
+    
+    // Letter content
+    const letterContents = [
+      `Mi querida,\n\nDesde el momento en que te vi por primera vez, supe que había algo especial en ti. La forma en que tus ojos se iluminan cuando ríes, el sonido de tu voz que me acelera el corazón y la calidez de tu....\n\nEres mi persona favorita en todo este mundo.
+      
+      `Every day with you feels like an adventure. Even in our quiet moments, when we'Simplemente existiendo juntos, siento una felicidad que nunca supe que fuera posible..\n\nGracias por ser la persona con la que puedo compartir mis sueños, el hombro en el que puedo apoyarme y la mano que puedo sostener en este viaje de la vida.
+      
+      `Prometo apreciar cada momento que compartamos, amarte a través de todos los altibajos de la vida y recordarte cada día lo especial que eres para mí.\n\nEres y siempre serás mi persona favorita.\n\nCon todo mi amor,\nTuyo para siempre`
+    ];
+    
+    // Lyrics for the song
+    const lyrics = [
+      { time: 0, text: "Esperando que empiece la música..." },
+      { time: 5, text: "Encontré a mi persona favorita" },
+      { time: 10, text: "The one who makes my heart smile" },
+      { time: 15, text: "In your arms I feel at home" },
+      { time: 20, text: "Like nowhere else I've known" },
+      { time: 25, text: "You're the melody to my lyrics" },
+      { time: 30, text: "The sun to my cloudy days" },
+      { time: 35, text: "My favorite person, always" },
+      { time: 40, text: "Through all our shared moments" },
+      { time: 45, text: "Through laughter and through tears" },
+      { time: 50, text: "You'll always be my favorite" },
+      { time: 55, text: "For all of my years" }
+    ];
+    
+    // Variables
+    let currentLetterIndex = 0;
+    let currentSlideIndex = 0;
+    let carouselInterval;
+    let letterTypingInterval;
+    let isCarouselPlaying = true;
+    let confettiInterval;
+    let currentLyricIndex = 0;
+    let lyricsInterval;
+    
+    // Functions
+    function hideLoading() {
+      loadingOverlay.style.opacity = '0';
+      setTimeout(() => {
+        loadingOverlay.style.display = 'none';
+      }, 500);
+    }
+    
+    function showMainContent() {
+      landingPage.style.display = 'none';
+      mainContent.style.display = 'block';
+      typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
+      startConfettiInterval();
+      updateLetterNavigation();
+    }
+    
+    function typeLetterEffect(text, element) {
+      let index = 0;
+      element.innerHTML = '<span class="typed-cursor"></span>';
+      
+      clearInterval(letterTypingInterval);
+      letterTypingInterval = setInterval(() => {
+        if (index < text.length) {
+          if (text[index] === '\n') {
+            element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', '<br><span class="typed-cursor"></span>');
+          } else {
+            element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', text[index] + '<span class="typed-cursor"></span>');
+          }
+          index++;
+        } else {
+          clearInterval(letterTypingInterval);
+        }
+      }, 50);
+    }
+    
+    function showNextLetter() {
+      if (currentLetterIndex < letters.length - 1) {
+        letters[currentLetterIndex].classList.remove('active');
+        currentLetterIndex++;
+        letters[currentLetterIndex].classList.add('active');
+        typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
+        updateLetterNavigation();
+      }
+    }
+    
+    function showPrevLetter() {
+      if (currentLetterIndex > 0) {
+        letters[currentLetterIndex].classList.remove('active');
+        currentLetterIndex--;
+        letters[currentLetterIndex].classList.add('active');
+        typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
+        updateLetterNavigation();
+      }
+    }
+    
+    function updateLetterNavigation() {
+      if (currentLetterIndex === 0) {
+        prevLetterBtn.disabled = true;
+        prevLetterBtn.classList.add('opacity-50');
+      } else {
+        prevLetterBtn.disabled = false;
+        prevLetterBtn.classList.remove('opacity-50');
+      }
+      
+      if (currentLetterIndex === letters.length - 1) {
+        nextLetterBtn.disabled = true;
+        nextLetterBtn.classList.add('opacity-50');
+      } else {
+        nextLetterBtn.disabled = false;
+        nextLetterBtn.classList.remove('opacity-50');
+      }
+    }
+    
+    function showNextSlide() {
+      carouselSlides[currentSlideIndex].classList.remove('active');
+      currentSlideIndex = (currentSlideIndex + 1) % carouselSlides.length;
+      carouselSlides[currentSlideIndex].classList.add('active');
+    }
+    
+    function showPrevSlide() {
+      carouselSlides[currentSlideIndex].classList.remove('active');
+      currentSlideIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
+      carouselSlides[currentSlideIndex].classList.add('active');
+    }
+    
+    function toggleCarouselPlay() {
+      if (isCarouselPlaying) {
+        clearInterval(carouselInterval);
+        carouselPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      } else {
+        carouselInterval = setInterval(showNextSlide, 5000);
+        carouselPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      }
+      isCarouselPlaying = !isCarouselPlaying;
+    }
+    
+    function startCarousel() {
+      if (isCarouselPlaying) {
+        carouselInterval = setInterval(showNextSlide, 5000);
+      }
+    }
+    
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+      heart.style.opacity = Math.random() * 0.5 + 0.5;
+      heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+      heartContainer.appendChild(heart);
+      
+      // Remove heart after animation completes
+      setTimeout(() => {
+        heart.remove();
+      }, 6000);
+    }
+    
+    function triggerHeartConfetti() {
+      for (let i = 0; i < 15; i++) {
+        setTimeout(createHeart, i * 150);
+      }
+    }
+    
+    function startConfettiInterval() {
+      triggerHeartConfetti();
+      confettiInterval = setInterval(triggerHeartConfetti, 30000);
+    }
+    
+    function toggleMusic() {
+      if (music.paused) {
+        music.play();
+        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+        startLyricsInterval();
+      } else {
+        music.pause();
+        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+        clearInterval(lyricsInterval);
+      }
+    }
+    
+    function toggleVolumeSlider() {
+      volumeSlider.classList.toggle('active');
+    }
+    
+    function updateVolume(e) {
+      const slider = volumeSlider.getBoundingClientRect();
+      const pos = (e.clientX - slider.left) / slider.width;
+      const volume = Math.max(0, Math.min(1, pos));
+      
+      volumeSliderFill.style.transform = `scaleX(${volume})`;
+      music.volume = volume;
+      
+      if (volume === 0) {
+        volumeToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+      } else if (volume < 0.5) {
+        volumeToggle.innerHTML = '<i class="fas fa-volume-down"></i>';
+      } else {
+        volumeToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+      }
+    }
+    
+    function toggleSettings() {
+      settingsMenu.classList.toggle('active');
+    }
+    
+    function changeTheme(theme) {
+      if (theme === 'default') {
+        document.body.className = '';
+      } else {
+        document.body.className = theme + '-theme';
+      }
+      settingsMenu.classList.remove('active');
+    }
+    
+    function restartExperience() {
+      clearInterval(letterTypingInterval);
+      clearInterval(carouselInterval);
+      clearInterval(confettiInterval);
+      clearInterval(lyricsInterval);
+      
+      music.pause();
+      music.currentTime = 0;
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+      
+      mainContent.style.display = 'none';
+      landingPage.style.display = 'flex';
+      
+      currentLetterIndex = 0;
+      currentSlideIndex = 0;
+      currentLyricIndex = 0;
+      
+      // Reset letters
+      letters.forEach(letter => letter.classList.remove('active'));
+      letters[0].classList.add('active');
+      
+      // Reset carousel
+      carouselSlides.forEach(slide => slide.classList.remove('active'));
+      carouselSlides[0].classList.add('active');
+      
+      // Reset lyrics
+      updateLyrics(0);
+      
+      isCarouselPlaying = true;
+      carouselPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+    }
+    
+    function updateLyrics(index) {
+      const lyricsLines = document.querySelectorAll('.lyrics-line');
+      lyricsLines.forEach(line => line.classList.remove('active'));
+      
+      if (index >= 0 && index < lyrics.length) {
+        lyricsContainer.innerHTML = '';
+        
+        // Display 3 lyrics: previous, current, next
+        for (let i = Math.max(0, index - 1); i <= Math.min(index + 1, lyrics.length - 1); i++) {
+          const line = document.createElement('p');
+          line.classList.add('lyrics-line');
+          line.textContent = lyrics[i].text;
+          
+          if (i === index) {
+            line.classList.add('active');
+          }
+          
+          lyricsContainer.appendChild(line);
+        }
+      }
+    }
+    
+    function startLyricsInterval() {
+      updateLyrics(currentLyricIndex);
+      
+      clearInterval(lyricsInterval);
+      lyricsInterval = setInterval(() => {
+        currentLyricIndex = (currentLyricIndex + 1) % lyrics.length;
+        updateLyrics(currentLyricIndex);
+      }, 5000);
+    }
+    
+    // Event Listeners
+    openLetterBtn.addEventListener('click', showMainContent);
+    prevLetterBtn.addEventListener('click', showPrevLetter);
+    nextLetterBtn.addEventListener('click', showNextLetter);
+    prevSlideBtn.addEventListener('click', showPrevSlide);
+    nextSlideBtn.addEventListener('click', showNextSlide);
+    carouselPlayPauseBtn.addEventListener('click', toggleCarouselPlay);
+    heartBtn.addEventListener('click', triggerHeartConfetti);
+    playPauseBtn.addEventListener('click', toggleMusic);
+    volumeToggle.addEventListener('click', toggleVolumeSlider);
+    settingsToggle.addEventListener('click', toggleSettings);
+    restartBtn.addEventListener('click', restartExperience);
+    
+    volumeSlider.addEventListener('mousedown', function(e) {
+      updateVolume(e);
+      volumeSlider.addEventListener('mousemove', updateVolume);
+      document.addEventListener('mouseup', function() {
+        volumeSlider.removeEventListener('mousemove', updateVolume);
+      }, { once: true });
+    });
+    
+    themeOptions.forEach(option => {
+      option.addEventListener('click', () => {
+        changeTheme(option.dataset.theme);
+      });
+    });
+    
+    // Music setup
+    music.volume = 0.7;
+    music.addEventListener('canplaythrough', function() {
+      console.log('Music is ready to play');
+    });
+    
+    // Init
+    window.addEventListener('load', () => {
+      // Hide loading overlay after a delay
+      setTimeout(hideLoading, 2000);
+      
+      // Start carousel
+      startCarousel();
+    });
+    
+    // Close settings menu when clicking outside
+    document.addEventListener('click', function(event) {
+      if (settingsMenu.classList.contains('active') && 
+          !settingsMenu.contains(event.target) && 
+          event.target !== settingsToggle) {
+        settingsMenu.classList.remove('active');
+      }
+    });
+    
+    // Preload images
+    carouselSlides.forEach(slide => {
+      const img = slide.querySelector('img');
+      if (img) {
+        const preloadImg = new Image();
+        preloadImg.src = img.src;
+      }
+    });
+  </script>
+</body>
+</html>
