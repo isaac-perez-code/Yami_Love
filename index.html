@@ -537,376 +537,375 @@
   
   <!-- Audio element -->
   <audio id="background-music" loop>
-    <source src="✨🎧 _kalimba _solodejateamar _foryouu _applemusic _zcbxya _fypp _paratiiiiiiiiiiiiiiiiiiiiiiiiiiiiiii _romantico _baladasromanticas _baladas _oldschool_1.mp3" type="audio/mpeg">
+    <source src="musica.mp3" type="audio/mpeg">
     Su navegador no soporta el elemento de audio.
   </audio>
 
-  <!-- Scripts -->
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script id="app-script">
-    // Initialize AOS animation library
-    AOS.init({
-      duration: 1000,
-      once: true
-    });
-    
-    // DOM Elements
-    const loadingOverlay = document.querySelector('.loading-overlay');
-    const landingPage = document.getElementById('landing-page');
-    const mainContent = document.getElementById('main-content');
-    const openLetterBtn = document.getElementById('open-letter-btn');
-    const letters = document.querySelectorAll('.letter');
-    const prevLetterBtn = document.getElementById('prev-letter');
-    const nextLetterBtn = document.getElementById('next-letter');
-    const restartBtn = document.getElementById('restart-btn');
-    const carouselSlides = document.querySelectorAll('.carousel-slide');
-    const prevSlideBtn = document.getElementById('prev-slide');
-    const nextSlideBtn = document.getElementById('next-slide');
-    const carouselPlayPauseBtn = document.getElementById('carousel-play-pause');
-    const heartBtn = document.getElementById('heart-btn');
-    const heartContainer = document.getElementById('heart-container');
-    const music = document.getElementById('background-music');
-    const playPauseBtn = document.getElementById('play-pause');
-    const volumeToggle = document.getElementById('volume-toggle');
-    const volumeSlider = document.querySelector('.volume-slider');
-    const volumeSliderFill = document.querySelector('.volume-slider-fill');
-    const settingsToggle = document.getElementById('settings-toggle');
-    const settingsMenu = document.querySelector('.settings-menu');
-    const themeOptions = document.querySelectorAll('.theme-option');
-    const lyricsContainer = document.querySelector('.lyrics-container');
-    
-    // Letter content
-    const letterContents = [
-      `Mi querida,\n\nDesde el momento en que te vi por primera vez, supe que había algo especial en ti. La forma en que tus ojos se iluminan cuando ríes, el sonido de tu voz que me acelera el corazón y la calidez de tu....\n\nEres mi persona favorita en todo este mundo.
-      
-      `Every day with you feels like an adventure. Even in our quiet moments, when we'Simplemente existiendo juntos, siento una felicidad que nunca supe que fuera posible..\n\nGracias por ser la persona con la que puedo compartir mis sueños, el hombro en el que puedo apoyarme y la mano que puedo sostener en este viaje de la vida.
-      
-      `Prometo apreciar cada momento que compartamos, amarte a través de todos los altibajos de la vida y recordarte cada día lo especial que eres para mí.\n\nEres y siempre serás mi persona favorita.\n\nCon todo mi amor,\nTuyo para siempre`
-    ];
-    
-    // Lyrics for the song
-    const lyrics = [
-      { time: 0, text: "Esperando que empiece la música..." },
-      { time: 5, text: "Encontré a mi persona favorita" },
-      { time: 10, text: "The one who makes my heart smile" },
-      { time: 15, text: "In your arms I feel at home" },
-      { time: 20, text: "Like nowhere else I've known" },
-      { time: 25, text: "You're the melody to my lyrics" },
-      { time: 30, text: "The sun to my cloudy days" },
-      { time: 35, text: "My favorite person, always" },
-      { time: 40, text: "Through all our shared moments" },
-      { time: 45, text: "Through laughter and through tears" },
-      { time: 50, text: "You'll always be my favorite" },
-      { time: 55, text: "For all of my years" }
-    ];
-    
-    // Variables
-    let currentLetterIndex = 0;
-    let currentSlideIndex = 0;
-    let carouselInterval;
-    let letterTypingInterval;
-    let isCarouselPlaying = true;
-    let confettiInterval;
-    let currentLyricIndex = 0;
-    let lyricsInterval;
-    
-    // Functions
-    function hideLoading() {
-      loadingOverlay.style.opacity = '0';
-      setTimeout(() => {
-        loadingOverlay.style.display = 'none';
-      }, 500);
-    }
-    
-    function showMainContent() {
-      landingPage.style.display = 'none';
-      mainContent.style.display = 'block';
+<script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+<script id="app-script">
+  // Initialize AOS animation library
+  AOS.init({
+    duration: 1000,
+    once: true
+  });
+
+  // DOM Elements
+  const loadingOverlay = document.querySelector('.loading-overlay');
+  const landingPage = document.getElementById('landing-page');
+  const mainContent = document.getElementById('main-content');
+  const openLetterBtn = document.getElementById('open-letter-btn');
+  const letters = document.querySelectorAll('.letter');
+  const prevLetterBtn = document.getElementById('prev-letter');
+  const nextLetterBtn = document.getElementById('next-letter');
+  const restartBtn = document.getElementById('restart-btn');
+  const carouselSlides = document.querySelectorAll('.carousel-slide');
+  const prevSlideBtn = document.getElementById('prev-slide');
+  const nextSlideBtn = document.getElementById('next-slide');
+  const carouselPlayPauseBtn = document.getElementById('carousel-play-pause');
+  const heartBtn = document.getElementById('heart-btn');
+  const heartContainer = document.getElementById('heart-container');
+  const music = document.getElementById('background-music');
+  const playPauseBtn = document.getElementById('play-pause');
+  const volumeToggle = document.getElementById('volume-toggle');
+  const volumeSlider = document.querySelector('.volume-slider');
+  const volumeSliderFill = document.querySelector('.volume-slider-fill');
+  const settingsToggle = document.getElementById('settings-toggle');
+  const settingsMenu = document.querySelector('.settings-menu');
+  const themeOptions = document.querySelectorAll('.theme-option');
+  const lyricsContainer = document.querySelector('.lyrics-container');
+
+  // Letter content - CORREGIDO
+  const letterContents = [
+    `Mi querida,\n\nDesde el momento en que te vi por primera vez, supe que había algo especial en ti. La forma en que tus ojos se iluminan cuando ríes, el sonido de tu voz que me acelera el corazón y la calidez de tu sonrisa...\n\nEres mi persona favorita en todo este mundo.`,
+
+    `Cada día a tu lado es una aventura. Incluso en los momentos tranquilos, cuando simplemente existimos juntos, siento una felicidad que nunca supe que fuera posible.\n\nGracias por ser la persona con la que puedo compartir mis sueños, el hombro en el que puedo apoyarme y la mano que puedo sostener en este viaje de la vida.`,
+
+    `Prometo apreciar cada momento que compartamos, amarte a través de todos los altibajos de la vida y recordarte cada día lo especial que eres para mí.\n\nEres y siempre serás mi persona favorita.\n\nCon todo mi amor,\nTuyo para siempre.`
+  ];
+
+  // Lyrics for the song
+  const lyrics = [
+    { time: 4, text: "Te he buscado tanto" },
+    { time: 7, text: "Y hoy que te he encontrado sé... " },
+    { time: 8, text: "Que no hay nadie más " },
+    { time: 10, text: "Nunca he sido un santo" },
+    { time: 13, text: "Debo confesarlo ya..." },
+    { time: 16, text: "Con honestidad" },
+    { time: 19, text: "Fueron tantas horas" },
+    { time: 21, text: "Tan solo y triste hasta que te vi" },
+    { time: 23, text: "Tú llenas mi vida" },
+    { time: 26, text: "Tu llenas mi alma" },
+    { time: 28, text: "Por eso siempre" },
+    { time: 30, text: "Quédate aquí" }
+  ];
+
+  // Variables
+  let currentLetterIndex = 0;
+  let currentSlideIndex = 0;
+  let carouselInterval;
+  let letterTypingInterval;
+  let isCarouselPlaying = true;
+  let confettiInterval;
+  let currentLyricIndex = 0;
+  let lyricsInterval;
+
+  // Functions
+  function hideLoading() {
+    loadingOverlay.style.opacity = '0';
+    setTimeout(() => {
+      loadingOverlay.style.display = 'none';
+    }, 500);
+  }
+
+  function showMainContent() {
+    landingPage.style.display = 'none';
+    mainContent.style.display = 'block';
+    typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
+    startConfettiInterval();
+    updateLetterNavigation();
+  }
+
+  function typeLetterEffect(text, element) {
+    let index = 0;
+    element.innerHTML = '<span class="typed-cursor"></span>';
+
+    clearInterval(letterTypingInterval);
+    letterTypingInterval = setInterval(() => {
+      if (index < text.length) {
+        if (text[index] === '\n') {
+          element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', '<br><span class="typed-cursor"></span>');
+        } else {
+          element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', text[index] + '<span class="typed-cursor"></span>');
+        }
+        index++;
+      } else {
+        clearInterval(letterTypingInterval);
+      }
+    }, 50);
+  }
+
+  function showNextLetter() {
+    if (currentLetterIndex < letters.length - 1) {
+      letters[currentLetterIndex].classList.remove('active');
+      currentLetterIndex++;
+      letters[currentLetterIndex].classList.add('active');
       typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
-      startConfettiInterval();
       updateLetterNavigation();
     }
-    
-    function typeLetterEffect(text, element) {
-      let index = 0;
-      element.innerHTML = '<span class="typed-cursor"></span>';
-      
-      clearInterval(letterTypingInterval);
-      letterTypingInterval = setInterval(() => {
-        if (index < text.length) {
-          if (text[index] === '\n') {
-            element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', '<br><span class="typed-cursor"></span>');
-          } else {
-            element.innerHTML = element.innerHTML.replace('<span class="typed-cursor"></span>', text[index] + '<span class="typed-cursor"></span>');
-          }
-          index++;
-        } else {
-          clearInterval(letterTypingInterval);
-        }
-      }, 50);
+  }
+
+  function showPrevLetter() {
+    if (currentLetterIndex > 0) {
+      letters[currentLetterIndex].classList.remove('active');
+      currentLetterIndex--;
+      letters[currentLetterIndex].classList.add('active');
+      typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
+      updateLetterNavigation();
     }
-    
-    function showNextLetter() {
-      if (currentLetterIndex < letters.length - 1) {
-        letters[currentLetterIndex].classList.remove('active');
-        currentLetterIndex++;
-        letters[currentLetterIndex].classList.add('active');
-        typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
-        updateLetterNavigation();
-      }
+  }
+
+  function updateLetterNavigation() {
+    if (currentLetterIndex === 0) {
+      prevLetterBtn.disabled = true;
+      prevLetterBtn.classList.add('opacity-50');
+    } else {
+      prevLetterBtn.disabled = false;
+      prevLetterBtn.classList.remove('opacity-50');
     }
-    
-    function showPrevLetter() {
-      if (currentLetterIndex > 0) {
-        letters[currentLetterIndex].classList.remove('active');
-        currentLetterIndex--;
-        letters[currentLetterIndex].classList.add('active');
-        typeLetterEffect(letterContents[currentLetterIndex], letters[currentLetterIndex]);
-        updateLetterNavigation();
-      }
+
+    if (currentLetterIndex === letters.length - 1) {
+      nextLetterBtn.disabled = true;
+      nextLetterBtn.classList.add('opacity-50');
+    } else {
+      nextLetterBtn.disabled = false;
+      nextLetterBtn.classList.remove('opacity-50');
     }
-    
-    function updateLetterNavigation() {
-      if (currentLetterIndex === 0) {
-        prevLetterBtn.disabled = true;
-        prevLetterBtn.classList.add('opacity-50');
-      } else {
-        prevLetterBtn.disabled = false;
-        prevLetterBtn.classList.remove('opacity-50');
-      }
-      
-      if (currentLetterIndex === letters.length - 1) {
-        nextLetterBtn.disabled = true;
-        nextLetterBtn.classList.add('opacity-50');
-      } else {
-        nextLetterBtn.disabled = false;
-        nextLetterBtn.classList.remove('opacity-50');
-      }
-    }
-    
-    function showNextSlide() {
-      carouselSlides[currentSlideIndex].classList.remove('active');
-      currentSlideIndex = (currentSlideIndex + 1) % carouselSlides.length;
-      carouselSlides[currentSlideIndex].classList.add('active');
-    }
-    
-    function showPrevSlide() {
-      carouselSlides[currentSlideIndex].classList.remove('active');
-      currentSlideIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
-      carouselSlides[currentSlideIndex].classList.add('active');
-    }
-    
-    function toggleCarouselPlay() {
-      if (isCarouselPlaying) {
-        clearInterval(carouselInterval);
-        carouselPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      } else {
-        carouselInterval = setInterval(showNextSlide, 5000);
-        carouselPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-      }
-      isCarouselPlaying = !isCarouselPlaying;
-    }
-    
-    function startCarousel() {
-      if (isCarouselPlaying) {
-        carouselInterval = setInterval(showNextSlide, 5000);
-      }
-    }
-    
-    function createHeart() {
-      const heart = document.createElement('div');
-      heart.classList.add('heart');
-      heart.style.left = Math.random() * 100 + 'vw';
-      heart.style.animationDuration = Math.random() * 3 + 3 + 's';
-      heart.style.opacity = Math.random() * 0.5 + 0.5;
-      heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
-      heartContainer.appendChild(heart);
-      
-      // Remove heart after animation completes
-      setTimeout(() => {
-        heart.remove();
-      }, 6000);
-    }
-    
-    function triggerHeartConfetti() {
-      for (let i = 0; i < 15; i++) {
-        setTimeout(createHeart, i * 150);
-      }
-    }
-    
-    function startConfettiInterval() {
-      triggerHeartConfetti();
-      confettiInterval = setInterval(triggerHeartConfetti, 30000);
-    }
-    
-    function toggleMusic() {
-      if (music.paused) {
-        music.play();
-        playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
-        startLyricsInterval();
-      } else {
-        music.pause();
-        playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-        clearInterval(lyricsInterval);
-      }
-    }
-    
-    function toggleVolumeSlider() {
-      volumeSlider.classList.toggle('active');
-    }
-    
-    function updateVolume(e) {
-      const slider = volumeSlider.getBoundingClientRect();
-      const pos = (e.clientX - slider.left) / slider.width;
-      const volume = Math.max(0, Math.min(1, pos));
-      
-      volumeSliderFill.style.transform = `scaleX(${volume})`;
-      music.volume = volume;
-      
-      if (volume === 0) {
-        volumeToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
-      } else if (volume < 0.5) {
-        volumeToggle.innerHTML = '<i class="fas fa-volume-down"></i>';
-      } else {
-        volumeToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
-      }
-    }
-    
-    function toggleSettings() {
-      settingsMenu.classList.toggle('active');
-    }
-    
-    function changeTheme(theme) {
-      if (theme === 'default') {
-        document.body.className = '';
-      } else {
-        document.body.className = theme + '-theme';
-      }
-      settingsMenu.classList.remove('active');
-    }
-    
-    function restartExperience() {
-      clearInterval(letterTypingInterval);
+  }
+
+  function showNextSlide() {
+    carouselSlides[currentSlideIndex].classList.remove('active');
+    currentSlideIndex = (currentSlideIndex + 1) % carouselSlides.length;
+    carouselSlides[currentSlideIndex].classList.add('active');
+  }
+
+  function showPrevSlide() {
+    carouselSlides[currentSlideIndex].classList.remove('active');
+    currentSlideIndex = (currentSlideIndex - 1 + carouselSlides.length) % carouselSlides.length;
+    carouselSlides[currentSlideIndex].classList.add('active');
+  }
+
+  function toggleCarouselPlay() {
+    if (isCarouselPlaying) {
       clearInterval(carouselInterval);
-      clearInterval(confettiInterval);
-      clearInterval(lyricsInterval);
-      
-      music.pause();
-      music.currentTime = 0;
-      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
-      
-      mainContent.style.display = 'none';
-      landingPage.style.display = 'flex';
-      
-      currentLetterIndex = 0;
-      currentSlideIndex = 0;
-      currentLyricIndex = 0;
-      
-      // Reset letters
-      letters.forEach(letter => letter.classList.remove('active'));
-      letters[0].classList.add('active');
-      
-      // Reset carousel
-      carouselSlides.forEach(slide => slide.classList.remove('active'));
-      carouselSlides[0].classList.add('active');
-      
-      // Reset lyrics
-      updateLyrics(0);
-      
-      isCarouselPlaying = true;
+      carouselPlayPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+    } else {
+      carouselInterval = setInterval(showNextSlide, 5000);
       carouselPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
     }
-    
-    function updateLyrics(index) {
-      const lyricsLines = document.querySelectorAll('.lyrics-line');
-      lyricsLines.forEach(line => line.classList.remove('active'));
-      
-      if (index >= 0 && index < lyrics.length) {
-        lyricsContainer.innerHTML = '';
-        
-        // Display 3 lyrics: previous, current, next
-        for (let i = Math.max(0, index - 1); i <= Math.min(index + 1, lyrics.length - 1); i++) {
-          const line = document.createElement('p');
-          line.classList.add('lyrics-line');
-          line.textContent = lyrics[i].text;
-          
-          if (i === index) {
-            line.classList.add('active');
-          }
-          
-          lyricsContainer.appendChild(line);
-        }
-      }
+    isCarouselPlaying = !isCarouselPlaying;
+  }
+
+  function startCarousel() {
+    if (isCarouselPlaying) {
+      carouselInterval = setInterval(showNextSlide, 5000);
     }
-    
-    function startLyricsInterval() {
-      updateLyrics(currentLyricIndex);
-      
+  }
+
+  function createHeart() {
+    const heart = document.createElement('div');
+    heart.classList.add('heart');
+    heart.style.left = Math.random() * 100 + 'vw';
+    heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+    heart.style.opacity = Math.random() * 0.5 + 0.5;
+    heart.style.transform = `scale(${Math.random() * 0.5 + 0.5})`;
+    heartContainer.appendChild(heart);
+
+    // Remove heart after animation completes
+    setTimeout(() => {
+      heart.remove();
+    }, 6000);
+  }
+
+  function triggerHeartConfetti() {
+    for (let i = 0; i < 15; i++) {
+      setTimeout(createHeart, i * 150);
+    }
+  }
+
+  function startConfettiInterval() {
+    triggerHeartConfetti();
+    confettiInterval = setInterval(triggerHeartConfetti, 30000);
+  }
+
+  function toggleMusic() {
+    if (music.paused) {
+      music.play();
+      playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+      startLyricsInterval();
+    } else {
+      music.pause();
+      playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
       clearInterval(lyricsInterval);
-      lyricsInterval = setInterval(() => {
-        currentLyricIndex = (currentLyricIndex + 1) % lyrics.length;
-        updateLyrics(currentLyricIndex);
-      }, 5000);
     }
-    
-    // Event Listeners
-    openLetterBtn.addEventListener('click', showMainContent);
-    prevLetterBtn.addEventListener('click', showPrevLetter);
-    nextLetterBtn.addEventListener('click', showNextLetter);
-    prevSlideBtn.addEventListener('click', showPrevSlide);
-    nextSlideBtn.addEventListener('click', showNextSlide);
-    carouselPlayPauseBtn.addEventListener('click', toggleCarouselPlay);
-    heartBtn.addEventListener('click', triggerHeartConfetti);
-    playPauseBtn.addEventListener('click', toggleMusic);
-    volumeToggle.addEventListener('click', toggleVolumeSlider);
-    settingsToggle.addEventListener('click', toggleSettings);
-    restartBtn.addEventListener('click', restartExperience);
-    
-    volumeSlider.addEventListener('mousedown', function(e) {
-      updateVolume(e);
-      volumeSlider.addEventListener('mousemove', updateVolume);
-      document.addEventListener('mouseup', function() {
-        volumeSlider.removeEventListener('mousemove', updateVolume);
-      }, { once: true });
-    });
-    
-    themeOptions.forEach(option => {
-      option.addEventListener('click', () => {
-        changeTheme(option.dataset.theme);
-      });
-    });
-    
-    // Music setup
-    music.volume = 0.7;
-    music.addEventListener('canplaythrough', function() {
-      console.log('Music is ready to play');
-    });
-    
-    // Init
-    window.addEventListener('load', () => {
-      // Hide loading overlay after a delay
-      setTimeout(hideLoading, 2000);
-      
-      // Start carousel
-      startCarousel();
-    });
-    
-    // Close settings menu when clicking outside
-    document.addEventListener('click', function(event) {
-      if (settingsMenu.classList.contains('active') && 
-          !settingsMenu.contains(event.target) && 
-          event.target !== settingsToggle) {
-        settingsMenu.classList.remove('active');
+  }
+
+  function toggleVolumeSlider() {
+    volumeSlider.classList.toggle('active');
+  }
+
+  function updateVolume(e) {
+    const slider = volumeSlider.getBoundingClientRect();
+    const pos = (e.clientX - slider.left) / slider.width;
+    const volume = Math.max(0, Math.min(1, pos));
+
+    volumeSliderFill.style.transform = `scaleX(${volume})`;
+    music.volume = volume;
+
+    if (volume === 0) {
+      volumeToggle.innerHTML = '<i class="fas fa-volume-mute"></i>';
+    } else if (volume < 0.5) {
+      volumeToggle.innerHTML = '<i class="fas fa-volume-down"></i>';
+    } else {
+      volumeToggle.innerHTML = '<i class="fas fa-volume-up"></i>';
+    }
+  }
+
+  function toggleSettings() {
+    settingsMenu.classList.toggle('active');
+  }
+
+  function changeTheme(theme) {
+    if (theme === 'default') {
+      document.body.className = '';
+    } else {
+      document.body.className = theme + '-theme';
+    }
+    settingsMenu.classList.remove('active');
+  }
+
+  function restartExperience() {
+    clearInterval(letterTypingInterval);
+    clearInterval(carouselInterval);
+    clearInterval(confettiInterval);
+    clearInterval(lyricsInterval);
+
+    music.pause();
+    music.currentTime = 0;
+    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+
+    mainContent.style.display = 'none';
+    landingPage.style.display = 'flex';
+
+    currentLetterIndex = 0;
+    currentSlideIndex = 0;
+    currentLyricIndex = 0;
+
+    // Reset letters
+    letters.forEach(letter => letter.classList.remove('active'));
+    letters[0].classList.add('active');
+
+    // Reset carousel
+    carouselSlides.forEach(slide => slide.classList.remove('active'));
+    carouselSlides[0].classList.add('active');
+
+    // Reset lyrics
+    updateLyrics(0);
+
+    isCarouselPlaying = true;
+    carouselPlayPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+  }
+
+  function updateLyrics(index) {
+    const lyricsLines = document.querySelectorAll('.lyrics-line');
+    lyricsLines.forEach(line => line.classList.remove('active'));
+
+    if (index >= 0 && index < lyrics.length) {
+      lyricsContainer.innerHTML = '';
+
+      // Display 3 lyrics: previous, current, next
+      for (let i = Math.max(0, index - 1); i <= Math.min(index + 1, lyrics.length - 1); i++) {
+        const line = document.createElement('p');
+        line.classList.add('lyrics-line');
+        line.textContent = lyrics[i].text;
+
+        if (i === index) {
+          line.classList.add('active');
+        }
+
+        lyricsContainer.appendChild(line);
       }
+    }
+  }
+
+  function startLyricsInterval() {
+    updateLyrics(currentLyricIndex);
+
+    clearInterval(lyricsInterval);
+    lyricsInterval = setInterval(() => {
+      currentLyricIndex = (currentLyricIndex + 1) % lyrics.length;
+      updateLyrics(currentLyricIndex);
+    }, 4200);
+  }
+
+  // Event Listeners
+  openLetterBtn.addEventListener('click', showMainContent);
+  prevLetterBtn.addEventListener('click', showPrevLetter);
+  nextLetterBtn.addEventListener('click', showNextLetter);
+  prevSlideBtn.addEventListener('click', showPrevSlide);
+  nextSlideBtn.addEventListener('click', showNextSlide);
+  carouselPlayPauseBtn.addEventListener('click', toggleCarouselPlay);
+  heartBtn.addEventListener('click', triggerHeartConfetti);
+  playPauseBtn.addEventListener('click', toggleMusic);
+  volumeToggle.addEventListener('click', toggleVolumeSlider);
+  settingsToggle.addEventListener('click', toggleSettings);
+  restartBtn.addEventListener('click', restartExperience);
+
+  volumeSlider.addEventListener('mousedown', function(e) {
+    updateVolume(e);
+    volumeSlider.addEventListener('mousemove', updateVolume);
+    document.addEventListener('mouseup', function() {
+      volumeSlider.removeEventListener('mousemove', updateVolume);
+    }, { once: true });
+  });
+
+  themeOptions.forEach(option => {
+    option.addEventListener('click', () => {
+      changeTheme(option.dataset.theme);
     });
-    
-    // Preload images
-    carouselSlides.forEach(slide => {
-      const img = slide.querySelector('img');
-      if (img) {
-        const preloadImg = new Image();
-        preloadImg.src = img.src;
-      }
-    });
-  </script>
+  });
+
+  // Music setup
+  music.volume = 0.7;
+  music.addEventListener('canplaythrough', function() {
+    console.log('Music is ready to play');
+  });
+
+  // Init
+  window.addEventListener('load', () => {
+    // Hide loading overlay after a delay
+    setTimeout(hideLoading, 2000);
+
+    // Start carousel
+    startCarousel();
+  });
+
+  // Close settings menu when clicking outside
+  document.addEventListener('click', function(event) {
+    if (settingsMenu.classList.contains('active') && 
+        !settingsMenu.contains(event.target) && 
+        event.target !== settingsToggle) {
+      settingsMenu.classList.remove('active');
+    }
+  });
+
+  // Preload images
+  carouselSlides.forEach(slide => {
+    const img = slide.querySelector('img');
+    if (img) {
+      const preloadImg = new Image();
+      preloadImg.src = img.src;
+    }
+  });
+</script>
 </body>
 </html>
